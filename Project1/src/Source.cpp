@@ -13,11 +13,12 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(800, 600), "DAVE");
     sf::View view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(800.0f, 600.0f));
     sf::Texture playerTexture;
-    playerTexture.loadFromFile("assets/dave1.png");
+    playerTexture.loadFromFile("assets/dave202.png");
+    sf::Vector2u textureCount(2, 3);
     sf::RectangleShape referenceBlock(Constants::UNIT_SIZE);
     referenceBlock.setFillColor(sf::Color::Blue);
     referenceBlock.setPosition(Constants::UNIT_SIZE * 5.0f);
-    Player player(&playerTexture, Constants::UNIT_SIZE, sf::Vector2f(1.5 * Constants::UNIT_SIZE.x, 9 * Constants::UNIT_SIZE.y), 2 * Constants::UNIT_SIZE.x);
+    Player player(&playerTexture,textureCount, 0.3f, Constants::UNIT_SIZE, sf::Vector2f(1.5 * Constants::UNIT_SIZE.x, 9 * Constants::UNIT_SIZE.y), 2 * Constants::UNIT_SIZE.x);
 
     sf::Clock clock;
     float deltaTime;
