@@ -40,10 +40,16 @@ void Player::Update(float deltaTime){
 	}
 	else{
 		row = 1;
+		if (velocity.x > 0.0f) {
+			facingRight = true;
+		}
+		else {
+			facingRight = false;
+		}
 	}
 
 	body.move(velocity.x * deltaTime, 0.0f);
-	playerAnimation.Update(row, true, deltaTime);
+	playerAnimation.Update(row, facingRight, deltaTime);
 	body.setTextureRect(playerAnimation.uvRect);
 }
 

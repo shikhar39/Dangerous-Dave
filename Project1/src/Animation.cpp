@@ -16,6 +16,7 @@ Animation::~Animation()
 void Animation::Update(int row, bool faceRight, float deltaTime){
 	currentImage.y = row;
 	totalTime += deltaTime;
+	uvRect.width = abs(uvRect.width);
 	if (totalTime > switchTime) {
 		currentImage.x++;
 		totalTime -= switchTime;
@@ -23,5 +24,12 @@ void Animation::Update(int row, bool faceRight, float deltaTime){
 			currentImage.x = 0;
 	}
 	uvRect.top = currentImage.y * uvRect.height;
-	uvRect.left = currentImage.x * uvRect.width;
+	if (faceRight) {
+		uvRect.left = currentImage.x * uvRect.width;
+	}
+	else {
+		uvRect.left = uvRect.width * (currentImage.x + 1);
+		uvRect.width = -uvRect.width;
+	}
+
 }
