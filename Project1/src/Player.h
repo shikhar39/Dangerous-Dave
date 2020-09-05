@@ -1,7 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Animation.h"
-class Player {
+#include "Collidable.h"
+class Player : public Collidable {
 public:
 	Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, sf::Vector2f size, sf::Vector2f position, float speed);
 	~Player();
@@ -12,7 +13,6 @@ public:
 
 private:
 	Animation playerAnimation;
-	sf::RectangleShape body;
 	sf::Vector2f velocity;
 	bool facingRight;
 	float speed;
