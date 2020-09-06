@@ -6,9 +6,10 @@ public:
 	Collidable();
 	~Collidable();
 	
-	bool checkCollision(Collidable other);
-
+	bool checkCollision(Collidable &other, float mass);
+	void Move(float x, float y);
 	sf::RectangleShape body;
 protected:
+	
 
 };

@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Player.h"
+#include "Platform.h"
 #include "Constants.h"
 
 void ResizeWindow(const sf::RenderWindow& window, sf::View& view) {
@@ -15,10 +16,13 @@ int main() {
     sf::Texture playerTexture;
     playerTexture.loadFromFile("assets/dave202.png");
     sf::Vector2u textureCount(2, 3);
-    sf::RectangleShape referenceBlock(Constants::UNIT_SIZE);
-    referenceBlock.setFillColor(sf::Color::Blue);
-    referenceBlock.setPosition(Constants::UNIT_SIZE * 5.0f);
-    Player player(&playerTexture,textureCount, 0.3f, Constants::UNIT_SIZE, sf::Vector2f(1.5 * Constants::UNIT_SIZE.x, 9 * Constants::UNIT_SIZE.y), 2 * Constants::UNIT_SIZE.x);
+    Player player(&playerTexture, textureCount, 0.3f, Constants::UNIT_SIZE, sf::Vector2f(1.5 * Constants::UNIT_SIZE.x, 9 * Constants::UNIT_SIZE.y), 2 * Constants::UNIT_SIZE.x);
+    view.setCenter(player.getPosition());
+
+    sf::Texture platformTexture;
+    platformTexture.loadFromFile("assets/redTile.png");
+    Platform referencePlatform(&platformTexture, Constants::UNIT_SIZE, sf::Vector2f(0 * Constants::UNIT_SIZE.x, 9 * Constants::UNIT_SIZE.y));
+
 
     sf::Clock clock;
     float deltaTime;
@@ -38,12 +42,14 @@ int main() {
         deltaTime = clock.restart().asSeconds();
 
         player.Update(deltaTime);
+        referencePlatform.checkCollision(player, 0.2f);
+
 
         window.clear();
         window.setView(view);
-        view.setCenter(player.getPosition());
+        //view.setCenter(player.getPosition());
         player.Draw(window);
-        window.draw(referenceBlock);
+        referencePlatform.Draw(window);
         window.display();
     }
     std::cout << "Exit status 0" << std::endl;
