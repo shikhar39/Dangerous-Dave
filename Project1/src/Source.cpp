@@ -22,6 +22,7 @@ int main() {
     sf::Texture platformTexture;
     platformTexture.loadFromFile("assets/redTile.png");
     Platform referencePlatform(&platformTexture, Constants::UNIT_SIZE, sf::Vector2f(0 * Constants::UNIT_SIZE.x, 9 * Constants::UNIT_SIZE.y));
+    Platform referencePlatform2(&platformTexture, Constants::UNIT_SIZE, sf::Vector2f(1.5 * Constants::UNIT_SIZE.x, 11 * Constants::UNIT_SIZE.y));
 
 
     sf::Clock clock;
@@ -42,7 +43,12 @@ int main() {
         deltaTime = clock.restart().asSeconds();
 
         player.Update(deltaTime);
-        referencePlatform.checkCollision(player, 0.2f);
+        if (referencePlatform.checkCollision(player, player.getDirection(), 0.2f)) {
+            player.onCollision();
+        }
+        if (referencePlatform2.checkCollision(player, player.getDirection(), 0.2f)) {
+            player.onCollision();
+        }
 
 
         window.clear();
@@ -50,6 +56,7 @@ int main() {
         //view.setCenter(player.getPosition());
         player.Draw(window);
         referencePlatform.Draw(window);
+        referencePlatform2.Draw(window);
         window.display();
     }
     std::cout << "Exit status 0" << std::endl;

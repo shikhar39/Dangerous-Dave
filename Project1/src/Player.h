@@ -9,11 +9,14 @@ public:
 
 	void Update(float deltaTime);
 	void Draw(sf::RenderWindow &window);
+	void onCollision();
 	sf::Vector2f getPosition() { return body.getPosition(); }
+	sf::Vector2f* getDirection() { return &direction; }
 
 private:
 	Animation playerAnimation;
 	sf::Vector2f velocity;
+	sf::Vector2f direction;
 	bool facingRight;
 	float speed;
 	float jumpHeight;
