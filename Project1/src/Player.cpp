@@ -11,7 +11,7 @@ Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, 
 	facingRight = true;
 	this->speed = speed;
 	canJump = true;
-	jumpHeight = size.y * 3;
+	jumpHeight = size.y * 2;
 	velocity.y = 0.0f;
 }
 
