@@ -9,5 +9,4 @@ public:
 	~Platform();
 	void Draw(sf::RenderWindow &window);
 private:
-	sf::Texture texture;
 };

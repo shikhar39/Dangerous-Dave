@@ -161,6 +161,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Animation.cpp" />
+    <ClCompile Include="src\Collectable.cpp" />
     <ClCompile Include="src\Collidable.cpp" />
     <ClCompile Include="src\Platform.cpp" />
     <ClCompile Include="src\Player.cpp" />
@@ -168,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Animation.h" />
+    <ClInclude Include="src\Collectable.h" />
     <ClInclude Include="src\Collidable.h" />
     <ClInclude Include="src\Constants.h" />
     <ClInclude Include="src\Platform.h" />
