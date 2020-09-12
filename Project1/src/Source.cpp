@@ -5,6 +5,8 @@
 #include "Platform.h"
 #include "Constants.h"
 #include "Collectable.h"
+#include <thread>
+#include <chrono>
 
 void ResizeWindow(const sf::RenderWindow& window, sf::View& view) {
     float aspectRatio = float(window.getSize().x) / float(window.getSize().y);
@@ -32,7 +34,7 @@ int main() {
     sf::Texture sphereTexture;
     sphereTexture.loadFromFile("assets/sphere.png");
     sf::Texture trophyTexture;
-    trophyTexture.loadFromFile("assets/sphere.png");
+    trophyTexture.loadFromFile("assets/cup1.png");
 
 
 
@@ -87,10 +89,27 @@ int main() {
     collectables.push_back(Collectable(&redDiamondsTexture, 0.8f * Constants::UNIT_SIZE, sf::Vector2f(17.5 * Constants::UNIT_SIZE.x, 1 * Constants::UNIT_SIZE.y)));
     collectables.push_back(Collectable(&sphereTexture, 0.8f * Constants::UNIT_SIZE, sf::Vector2f(1.5 * Constants::UNIT_SIZE.x, 1 * Constants::UNIT_SIZE.y)));
 
+
+    std::vector<sf::RectangleShape> victory;
+    for (int i = 0; i < 3; i++) {
+        sf::RectangleShape victoryTrophy;
+        victoryTrophy.setSize(Constants::UNIT_SIZE);
+        victoryTrophy.setOrigin(Constants::UNIT_SIZE / 2.0f);
+        victoryTrophy.setTexture(&trophyTexture);
+        victoryTrophy.setPosition(( 7.5 + i ) * Constants::UNIT_SIZE.x , 10 * Constants::UNIT_SIZE.y);
+        victory.push_back(victoryTrophy);
+    }
+
+    Collectable trophy(&trophyTexture, 0.8f * Constants::UNIT_SIZE, sf::Vector2f(11.5 * Constants::UNIT_SIZE.x, 2 * Constants::UNIT_SIZE.y));
+    Collectable exit(&doorTexture, 0.8f * Constants::UNIT_SIZE, sf::Vector2f(12.5 * Constants::UNIT_SIZE.x, 8 * Constants::UNIT_SIZE.y));
+
     sf::Clock clock;
     float deltaTime;
+    bool trophyCollected = false;
+    bool levelFinished = false;
 
-    while (window.isOpen()) {
+    while (window.isOpen() && !levelFinished) {
+        window.clear();
         sf::Event event;
         while (window.pollEvent(event)) {
             switch (event.type) {
@@ -118,8 +137,23 @@ int main() {
             else
                 it++;
         }
+        if (!trophyCollected) {
+            trophy.Draw(window);
+            if (trophy.checkCollision(player, player.getDirection(), 1.0f)) {
+                trophy.~Collectable();
+                trophyCollected = true;
+            }
+        }
+        else {
+            if (exit.checkCollision(player, player.getDirection(), 1.0f)) {
+                std::cout << "Finished" << std::endl;
+                for (sf::RectangleShape& vic : victory) {
+                    window.draw(vic);
+                    levelFinished = true;
+                }
 
-        window.clear();
+            }
+        }
         window.setView(view);
         //view.setCenter(player.getPosition());
         player.Draw(window);
@@ -129,8 +163,10 @@ int main() {
         for (Collectable& collectable : collectables) {
             collectable.Draw(window);
         }
+        exit.Draw(window);
         window.display();
     }
+    std::this_thread::sleep_for(std::chrono::seconds(5));
     std::cout << "Exit status 0" << std::endl;
     return 0;
 }

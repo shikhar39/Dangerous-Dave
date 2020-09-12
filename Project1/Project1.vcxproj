@@ -168,6 +168,7 @@
     <ClCompile Include="src\Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\AnimatedCollidable.h" />
     <ClInclude Include="src\Animation.h" />
     <ClInclude Include="src\Collectable.h" />
     <ClInclude Include="src\Collidable.h" />

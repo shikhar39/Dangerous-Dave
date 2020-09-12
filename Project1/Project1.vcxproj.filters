@@ -53,5 +53,8 @@
     <ClInclude Include="src\Collectable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\AnimatedCollidable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
