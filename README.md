@@ -1,6 +1,6 @@
 # Dangerous-Dave
-This is my beginners attempt to recreate the classic game of Dangerous Dave from 1990. I have made this for my personal learning purposes. If you are going through the project, I would highly appreciate people sending me notes on how I can imrpove my coding style or anything in General.
-I'll be using developing it in C++, using the SFML library.
+This is my beginners attempt to recreate the classic game of Dangerous Dave from 1990. I have made this for my personal learning purposes. If you are going through the project, I would highly appreciate people sending me notes on how I can imrpove my coding style or anything in General. Also any suggestions as to how should I scale it to add multiple levels is also appreciated. 
+I'll be developing it in C++, using the SFML library.
 
 The target system should be an x64 based system. Project can be compiled using the visual studio solution file in the root directory of the repository. Some .dll files will be required to run the executables which can be found in /Project1/SFML/dependencies. You can copy paste them into the folder which has your executables.
 
